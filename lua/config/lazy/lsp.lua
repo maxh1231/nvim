@@ -11,6 +11,7 @@ return {
         local cmp = require("cmp")
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_lsp.default_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
 
         require("mason").setup()
         require("mason-lspconfig").setup({
@@ -18,6 +19,16 @@ return {
                 "lua_ls",
                 "marksman",
                 "bashls",
+                "cssls",
+                "docker_compose_language_service",
+                "dockerls",
+                "emmet_language_server",
+                "gh_actions_ls",
+                "html",
+                "tailwindcss",
+                "graphql",
+                "java_language_server",
+                -- TODO: "sqls",
             },
             handlers = {
                 function(server_name)
