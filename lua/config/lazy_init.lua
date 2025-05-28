@@ -22,4 +22,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
-require("lazy").setup("config.lazy")
+require("lazy").setup({
+    spec = "config.lazy",
+    change_detection = { notify = false }
+})
+
