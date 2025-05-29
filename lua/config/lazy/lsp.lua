@@ -5,6 +5,12 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/nvim-cmp",
         "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "j-hui/fidget.nvim",
     },
 
     config = function()
@@ -13,6 +19,23 @@ return {
         local capabilities = cmp_lsp.default_capabilities()
         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+        vim.lsp.config('lua_ls', {
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = 'LuaJIT',
+                    },
+                    diagnostics = {
+                        globals = {
+                            'vim',
+                            'require',
+                        },
+                    },
+                },
+            },
+        })
+
+        require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -28,6 +51,7 @@ return {
                 "tailwindcss",
                 "graphql",
                 "java_language_server",
+                "ts_ls"
                 -- TODO: "sqls",
             },
             handlers = {
@@ -36,22 +60,30 @@ return {
                         capabilities = capabilities,
                     })
                 end,
-            },
+            }
         })
 
         cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require("luasnip").lsp_expand(args.body)
+                end
+            },
             mapping = cmp.mapping.preset.insert({
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
-            sources = {
+            sources = cmp.config.sources({
                 { name = "nvim_lsp" },
-            },
+                { name = "luasnip" },
+                { name = "buffer" }
+            }),
         })
 
         vim.diagnostic.config({
+            virtual_text = true,
             float = {
                 focusable = false,
                 style = "minimal",
