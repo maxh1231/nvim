@@ -55,7 +55,8 @@ return {
                 "tailwindcss",
                 "graphql",
                 "java_language_server",
-                "ts_ls"
+                "ts_ls",
+                "eslint"
                 -- TODO: "sqls",
             },
             handlers = {
@@ -64,6 +65,16 @@ return {
                         capabilities = capabilities,
                     })
                 end,
+                require("lspconfig").eslint.setup({
+                    on_attach = function(client)
+                        -- Disable eslint formatting
+                        client.server_capabilities.documentFormattingProvider = false
+                        client.server_capabilities.documentRangeFormattingProvider = false
+                    end,
+                    settings = {
+                        -- Optional: You can pass custom settings here
+                    }
+                })
             }
         })
 
