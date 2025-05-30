@@ -65,17 +65,30 @@ return {
                         capabilities = capabilities,
                     })
                 end,
-                require("lspconfig").eslint.setup({
-                    on_attach = function(client)
-                        -- Disable eslint formatting
-                        client.server_capabilities.documentFormattingProvider = false
-                        client.server_capabilities.documentRangeFormattingProvider = false
-                    end,
-                    settings = {
-                        -- Optional: You can pass custom settings here
-                    }
-                })
             }
+        })
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
+                local bufnr = args.buf
+
+                if client.name ~= "eslint" then
+                    return
+                end
+
+                -- Save original handler so we don't affect other clients
+                local orig_publish = vim.lsp.handlers["textDocument/publishDiagnostics"]
+
+                -- Wrap the handler only for this ESLint client
+                vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+                    if ctx.client_id == client.id and result and result.diagnostics then
+                        result.diagnostics = vim.tbl_filter(function(diagnostic)
+                            return diagnostic.code ~= "prettier/prettier"
+                        end, result.diagnostics)
+                    end
+                    return orig_publish(err, result, ctx, config)
+                end
+            end,
         })
 
         cmp.setup({
@@ -98,7 +111,15 @@ return {
         })
 
         vim.diagnostic.config({
-            virtual_text = true,
+            severity_sort = true,
+            virtual_text = {
+                format = function(diagnostic)
+                    if diagnostic.code == "prettier/prettier" then
+                        return nil
+                    end
+                    return diagnostic.message
+                end,
+            },
             float = {
                 focusable = false,
                 style = "minimal",

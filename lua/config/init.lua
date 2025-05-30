@@ -6,10 +6,10 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- rename compose files to support lsp
 autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "docker-compose*.yml", "docker-compose*.yaml" },
-  callback = function()
-    vim.bo.filetype = "yaml.docker-compose"
-  end,
+    pattern = { "docker-compose*.yml", "docker-compose*.yaml" },
+    callback = function()
+        vim.bo.filetype = "yaml.docker-compose"
+    end,
 })
 
 autocmd('LspAttach', {
