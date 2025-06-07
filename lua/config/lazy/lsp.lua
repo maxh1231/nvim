@@ -70,16 +70,12 @@ return {
         vim.api.nvim_create_autocmd("LspAttach", {
             callback = function(args)
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
-                local bufnr = args.buf
 
                 if client.name ~= "eslint" then
                     return
                 end
 
-                -- Save original handler so we don't affect other clients
                 local orig_publish = vim.lsp.handlers["textDocument/publishDiagnostics"]
-
-                -- Wrap the handler only for this ESLint client
                 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
                     if ctx.client_id == client.id and result and result.diagnostics then
                         result.diagnostics = vim.tbl_filter(function(diagnostic)
@@ -106,8 +102,22 @@ return {
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
-                { name = "buffer" }
+                { name = "buffer" },
+                { name = "path" }
             }),
+        })
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = 'path' }
+            }, {
+                {
+                    name = 'cmdline',
+                    option = {
+                        ignore_cmds = { 'Man', '!' }
+                    }
+                }
+            })
         })
 
         vim.diagnostic.config({

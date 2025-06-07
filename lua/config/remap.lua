@@ -35,6 +35,10 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+
 autocmd('LspAttach', {
     callback = function(e)
         local opts = { buffer = e.buf }
@@ -51,7 +55,7 @@ autocmd('LspAttach', {
     end
 })
 
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
     pattern = "HarpoonLoaded",
     callback = function()
         local harpoon = require("harpoon")
@@ -67,4 +71,47 @@ vim.api.nvim_create_autocmd("User", {
         vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
     end,
 })
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+autocmd("User", {
+    pattern = "LuaSnipLoaded",
+    callback = function()
+        local ls = require("luasnip")
+        ls.filetype_extend("javascript", { "jsdoc" })
+
+        vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
+
+        vim.keymap.set({ "i", "s" }, "<C-E>", function()
+            if ls.choice_active() then
+                ls.change_choice(1)
+            end
+        end, { silent = true })
+    end,
+})
+autocmd("User", {
+    pattern = "NeogenLoaded",
+    callback = function()
+        local ok, neogen = pcall(require, "neogen")
+        if not ok then return end
+
+        vim.keymap.set("n", "<leader>nf", function()
+            neogen.generate({ type = "func" })
+        end)
+
+        vim.keymap.set("n", "<leader>nt", function()
+            neogen.generate({ type = "type" })
+        end)
+    end,
+})
+autocmd("User", {
+    pattern = "TelescopeLoaded",
+    callback = function()
+        local builtin = require('telescope.builtin')
+        vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
+        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        vim.keymap.set('n', '<leader>ps', function()
+            builtin.grep_string({ search = vim.fn.input("Grep > ") });
+        end)
+        vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+    end
+})
