@@ -22,6 +22,12 @@ autocmd("BufReadPost", {
     end
 })
 
+function _G.git_branch()
+    local raw = vim.fn.FugitiveStatusline()
+    local branch = raw:match("Git%((.+)%)")
+    return branch and (" " .. branch) or ""
+end
+
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
