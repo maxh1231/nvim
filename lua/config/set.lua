@@ -24,3 +24,4 @@ vim.opt.statusline = table.concat({
     "%{v:lua.git_branch()}",
     "%=%-14.(%l,%c%V%)"
 })
+vim.opt.wrap = true

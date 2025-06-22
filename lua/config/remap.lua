@@ -88,21 +88,21 @@ autocmd("User", {
         end, { silent = true })
     end,
 })
-autocmd("User", {
-    pattern = "NeogenLoaded",
-    callback = function()
-        local ok, neogen = pcall(require, "neogen")
-        if not ok then return end
-
-        vim.keymap.set("n", "<leader>nf", function()
-            neogen.generate({ type = "func" })
-        end)
-
-        vim.keymap.set("n", "<leader>nt", function()
-            neogen.generate({ type = "type" })
-        end)
-    end,
-})
+vim.keymap.set("n", "<leader>nf", ":lua require('neogen').generate()<CR>", {})
+--autocmd("User", {
+--    pattern = "NeogenLoaded",
+--    callback = function()
+--        local neogen = require("neogen")
+--
+--        vim.keymap.set("n", "<leader>nf", function()
+--            neogen.generate({ type = "func" })
+--        end)
+--
+--        vim.keymap.set("n", "<leader>nt", function()
+--            neogen.generate({ type = "type" })
+--        end)
+--    end,
+--})
 autocmd("User", {
     pattern = "TelescopeLoaded",
     callback = function()

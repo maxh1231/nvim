@@ -56,7 +56,8 @@ return {
                 "graphql",
                 "java_language_server",
                 "ts_ls",
-                "eslint"
+                "eslint",
+                "clangd"
                 -- TODO: "sqls",
             },
             handlers = {
