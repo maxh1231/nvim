@@ -3,26 +3,29 @@ local autocmd = vim.api.nvim_create_autocmd
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+-- half page navigation and center screen
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+-- repeat search in previous direction and center screen
 vim.keymap.set("n", "N", "Nzzzv")
+-- indent paragraph without moving cursor
 vim.keymap.set("n", "=ap", "ma=ap'a")
-
+-- paste in visual mode without overwriting yank buffer
 vim.keymap.set("x", "p", [["_dP]])
-
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-
+-- delete without overwriting yank buffer
 vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 
+-- yank to clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ bufnr = 0 })
 end)
 
+-- quick fix navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
@@ -67,6 +70,7 @@ autocmd("User", {
         vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
     end,
 })
+
 autocmd("User", {
     pattern = "LuaSnipLoaded",
     callback = function()
@@ -84,27 +88,14 @@ autocmd("User", {
         end, { silent = true })
     end,
 })
+
 vim.keymap.set("n", "<leader>nf", ":lua require('neogen').generate()<CR>", {})
---autocmd("User", {
---    pattern = "NeogenLoaded",
---    callback = function()
---        local neogen = require("neogen")
---
---        vim.keymap.set("n", "<leader>nf", function()
---            neogen.generate({ type = "func" })
---        end)
---
---        vim.keymap.set("n", "<leader>nt", function()
---            neogen.generate({ type = "type" })
---        end)
---    end,
---})
+
 autocmd("User", {
     pattern = "TelescopeLoaded",
     callback = function()
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        vim.keymap.set('n', '<C-p', builtin.find_files, {})
         vim.keymap.set('n', '<leader>ps', function()
             builtin.grep_string({ search = vim.fn.input("Grep > ") });
         end)
