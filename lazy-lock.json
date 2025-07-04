@@ -18,6 +18,7 @@
   "mini.icons": { "branch": "main", "commit": "94848dad1589a199f876539bd79befb0c5e3abf0" },
   "mini.indentscope": { "branch": "main", "commit": "5fdc3edf7bb1b6365980c2c47dac2f19ec93c97b" },
   "mini.move": { "branch": "main", "commit": "f471ecb98395781827ef1dffee61afe1af0ace29" },
+  "mini.statusline": { "branch": "main", "commit": "452d27d764720cddcb9909b786598bb9e80c1ce8" },
   "mini.surround": { "branch": "main", "commit": "1a2b59c77a0c4713a5bd8972da322f842f4821b1" },
   "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
   "netrw.nvim": { "branch": "master", "commit": "90501c62b9b816ed3ed1e912ae9db9af5671a1b2" },

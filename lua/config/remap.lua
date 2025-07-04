@@ -25,6 +25,7 @@ vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ bufnr = 0 })
 end)
 
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 -- quick fix navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -95,7 +96,7 @@ autocmd("User", {
     pattern = "TelescopeLoaded",
     callback = function()
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<C-p', builtin.find_files, {})
+        vim.keymap.set('n', '<C-p>', builtin.find_files, {})
         vim.keymap.set('n', '<leader>ps', function()
             builtin.grep_string({ search = vim.fn.input("Grep > ") });
         end)

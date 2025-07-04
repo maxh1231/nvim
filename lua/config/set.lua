@@ -6,7 +6,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
-vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -19,9 +18,5 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
-vim.opt.statusline = table.concat({
-    "%f %h%m%r ",
-    "%{v:lua.git_branch()}",
-    "%=%-14.(%l,%c%V%)"
-})
 vim.opt.wrap = true
+vim.opt.showmode = false
