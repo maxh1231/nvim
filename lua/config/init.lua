@@ -28,6 +28,11 @@ function _G.git_branch()
     return branch and (" " .. branch) or ""
 end
 
+vim.cmd([[
+  cabbrev h vert h
+  cabbrev help vert help
+]])
+
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
