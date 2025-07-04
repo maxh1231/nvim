@@ -1,5 +1,4 @@
 local autocmd = vim.api.nvim_create_autocmd
-
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -19,25 +18,31 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 -- yank to clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+
 vim.keymap.set("n", "Q", "<nop>")
 
+-- Conform format
 vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ bufnr = 0 })
 end)
 
+-- Fugitive :Git
 vim.keymap.set("n", "<leader>gs", ":vert Git<CR>")
 -- quick fix navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
+-- search and replace word under cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- make current file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
 vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+
+vim.keymap.set("n", "<leader>nf", ":lua require('neogen').generate()<CR>", {})
 
 autocmd('LspAttach', {
     callback = function(e)
@@ -89,8 +94,6 @@ autocmd("User", {
         end, { silent = true })
     end,
 })
-
-vim.keymap.set("n", "<leader>nf", ":lua require('neogen').generate()<CR>", {})
 
 autocmd("User", {
     pattern = "TelescopeLoaded",
