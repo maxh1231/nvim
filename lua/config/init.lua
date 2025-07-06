@@ -22,6 +22,12 @@ autocmd("BufReadPost", {
     end
 })
 
+autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank()
+    end
+})
+
 function _G.git_branch()
     local raw = vim.fn.FugitiveStatusline()
     local branch = raw:match("Git%((.+)%)")

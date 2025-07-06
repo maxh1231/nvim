@@ -1,6 +1,12 @@
 local autocmd = vim.api.nvim_create_autocmd
+
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- invoke Lua on current line
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+-- invoke Lua on current selection
+vim.keymap.set("v", "<space>x", ":lua<CR>")
 
 -- half page navigation and center screen
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -35,8 +41,6 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- search and replace word under cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
--- make current file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
