@@ -13,15 +13,27 @@ return {
                 css = { "prettier" },
                 html = { "prettier" },
                 graphql = { "prettier" },
-                markdown = { "prettier" },
-                c = { "astyle" },
-                cpp = { "astyle" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
                 objc = { "astyle" },
                 objcpp = { "astyle" },
                 cs = { "astyle" },
+                python = { "autopep8" }
             },
             format_on_save = {
                 lsp_format = "fallback"
+            },
+            formatters = {
+                ["clang-format"] = {
+                    prepend_args = {
+                        "-style={ \
+                            IndentWidth: 4, \
+                            TabWidth: 4, \
+                            AccessModifierOffset: 0, \
+                            IndentAccessModifiers: true, \
+                        }",
+                    }
+                }
             }
         })
     end

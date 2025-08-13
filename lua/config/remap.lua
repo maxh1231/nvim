@@ -32,6 +32,8 @@ vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ bufnr = 0 })
 end)
 
+vim.keymap.set("n", "<Tab>", ":bnext<CR>")
+vim.keymap.set("n", "<S-Tab>", ":bprev<CR>")
 -- Fugitive :Git
 vim.keymap.set("n", "<leader>gs", ":vert Git<CR>")
 -- quick fix navigation

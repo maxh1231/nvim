@@ -57,8 +57,8 @@ return {
                 "java_language_server",
                 "ts_ls",
                 "eslint",
-                "clangd"
-                -- TODO: "sqls",
+                "clangd",
+                "pyright"
             },
             handlers = {
                 function(server_name)
