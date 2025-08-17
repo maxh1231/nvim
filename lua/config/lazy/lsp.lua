@@ -27,7 +27,7 @@ return {
             settings = {
                 Lua = {
                     runtime = {
-                        version = 'LuaJIT',
+                        version = 'lua',
                     },
                     diagnostics = {
                         globals = {
