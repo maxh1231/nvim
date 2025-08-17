@@ -38,3 +38,13 @@ vim.cmd([[
   cabbrev h vert h
   cabbrev help vert help
 ]])
+
+vim.g.firenvim_config = {
+    globalSettings = { alt = "all" },
+    localSettings = {
+        [".*"] = {
+            cmdline  = "neovim",
+            takeover = "never"
+        }
+    }
+}
