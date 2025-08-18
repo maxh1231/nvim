@@ -8,23 +8,19 @@ end
 
 return {
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        config = function()
-            require("tokyonight").setup({
-                style = { "moon" }
-            })
-        end
-    },
-    {
         "rose-pine/neovim",
         name = "rose-pine",
+        lazy = false,
+        priority = 1000,
         config = function()
-            require('rose-pine').setup({
-                disable_background = true,
+            require("rose-pine").setup({
+                variant = "moon",
                 styles = {
                     italic = false,
-                }
+                    transparency = true
+                },
+                dim_inactive_windows = false,
+                extend_background_behind_borders = true,
             })
             ColorMyPencils()
         end
