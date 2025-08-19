@@ -112,3 +112,26 @@ autocmd("User", {
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
     end
 })
+
+autocmd("User", {
+    pattern = "ClaudeCodeLoaded",
+    callback = function()
+        vim.keymap.set('t', '<C-w>h', '<C-\\><C-n><C-w>h',
+            { desc = 'Navigate left window' })
+
+        vim.keymap.set('t', '<C-w>j', '<C-\\><C-n><C-w>j',
+            { desc = 'Navigate down window' })
+
+        vim.keymap.set('t', '<C-w>k', '<C-\\><C-n><C-w>k',
+            { desc = 'Navigate up window' })
+
+        vim.keymap.set('t', '<C-w>l', '<C-\\><C-n><C-w>l',
+            { desc = 'Navigate right window' })
+
+        vim.keymap.set('t', '<C-u>', '<C-\\><C-n><C-u>',
+            { desc = 'Scroll up' })
+
+        vim.keymap.set('t', '<C-d>', '<C-\\><C-n><C-d>',
+            { desc = 'Scroll down' })
+    end
+})
