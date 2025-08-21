@@ -43,22 +43,24 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls",
-                "marksman",
                 "bashls",
+                "clangd",
+                "cmake",
                 "cssls",
                 "docker_compose_language_service",
                 "dockerls",
                 "emmet_language_server",
-                "gh_actions_ls",
-                "html",
-                "tailwindcss",
-                "graphql",
-                "java_language_server",
-                "ts_ls",
                 "eslint",
-                "clangd",
-                "pyright"
+                "gh_actions_ls",
+                "gopls",
+                "graphql",
+                "html",
+                "java_language_server",
+                "lua_ls",
+                "marksman",
+                "pyright",
+                "tailwindcss",
+                "ts_ls"
             },
             handlers = {
                 function(server_name)
@@ -97,8 +99,7 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
-                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<Tab>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },

@@ -36,7 +36,7 @@ return {
                 pushd_cmd = 'pushd', -- Command to push directory onto stack (e.g., 'pushd' for bash/zsh, 'enter' for nushell)
                 popd_cmd = 'popd',   -- Command to pop directory from stack (e.g., 'popd' for bash/zsh, 'exit' for nushell)
             },
-            command = "claude",
+            command = "claude --continue || claude",
             command_variants = {
                 continue = "--continue", -- Resume the most recent conversation
                 resume = "--resume",     -- Display an interactive conversation picker
@@ -44,11 +44,11 @@ return {
             },
             keymaps = {
                 toggle = {
-                    normal = false,              -- Normal mode keymap for toggling Claude Code, false to disable
-                    terminal = "<leader>cc",     -- Terminal mode keymap for toggling Claude Code, false to disable
-                    variants = {
-                        continue = "<leader>cc", -- Normal mode keymap for Claude Code with continue flag
-                    },
+                    normal = "<leader>cc",   -- Normal mode keymap for toggling Claude Code, false to disable
+                    terminal = "<leader>cc", -- Terminal mode keymap for toggling Claude Code, false to disable
+                    -- variants = {
+                    --     continue = "<leader>cc", -- Normal mode keymap for Claude Code with continue flag
+                    -- },
                 },
                 window_navigation = true, -- Enable window navigation keymaps (<C-h/j/k/l>)
                 scrolling = true,         -- Enable scrolling keymaps (<C-f/b>) for page up/down

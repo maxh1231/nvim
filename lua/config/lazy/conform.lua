@@ -18,7 +18,8 @@ return {
                 objc = { "astyle" },
                 objcpp = { "astyle" },
                 cs = { "astyle" },
-                python = { "autopep8" }
+                python = { "autopep8" },
+                go = { "gofmt" }
             },
             format_on_save = {
                 lsp_format = "fallback"
